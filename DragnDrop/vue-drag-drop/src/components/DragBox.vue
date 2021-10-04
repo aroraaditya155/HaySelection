@@ -1,13 +1,17 @@
 <template>
-  <div class="drag-drop-box">
+
+
+
+ <div class="drag-drop-box">
+             
     <div class="row">
       <div class="col-md-3 drag-col1" v-for="bay in bayArray" :key="bay.bayNumber">
         <div class="p-2 alert alert-warning">
           <p>{{ bay.Name }}</p>
           
-<div class="list-group-item" v-for="(item, index) in bay.items" :key="index">
-          <draggable class="list-group list-col1" v-model="bay.items[index]" :options="availableItemOptions">
-            <div class="list-group-item" >
+<div class="list-group-item" v-for="(item, index) in bay.items" :key="index" :baydragabble="item.bay" :locationdraggable="item.location">
+          <draggable class="list-group list-col1"  :baydragabble="item.bay" :locationdraggable="item.location" group="items1" @end="onEnd" @add="onAdd" >
+            <div v-if="item.bay !='2'" class="list-group-item" :bay="item.bay" :location="item.location">
               <p>{{ item.property1 }}</p>
               <p>{{ item.property2 }}</p>
               <p>{{ item.property3 }}</p>
@@ -18,19 +22,21 @@
           </draggable>
 </div>
         </div>
-      </div>
     </div>
   </div>
+</div>
+
 </template>
 
 <script>
+
 import draggable from "vuedraggable";
 
 export default {
   components: { draggable },
 
   props: {
-    bayArray: []
+    bayArray: [],
   },
   data() {
     return {
@@ -50,10 +56,9 @@ export default {
       arr3: [],
       availableItemOptions: {
         group: {
-          name: "items",
-          pull:"clone"
+          name: "items"
+          
         },
-
       },
       clonedCustomerItemOptions: {
         group: "items",
@@ -62,11 +67,33 @@ export default {
       clonedItemAllocationOptions: {
         group: "items",
       },
-      clonedAllocationItems: []
+      clonedAllocationItems: [],
     };
   },
   methods: {
+    onAdd:function(e){
+      debugger;
+      if(e.srcElement.childElementCount >1 ){
+        e.item.remove;
+          var bay = e.item.getAttribute('bay');
+      var location = e.item.getAttribute('location');
+      var parentEl  = document.querySelectorAll("[baydragabble='"+bay+"'][locationdraggable='"+location+"']")[0];
+      parentEl.firstChild.appendChild(e.item);
+      }
+      else{
+        //update bay and location for e.item frome.source
+        // Add dirty
+        e.source
+      }
     
+
+    },
+    onEnd:function(e){
+     
+    },
+    onMove:function(e){
+      alert("move");debugger;
+    }
     // add() {
     //   if (this.newTask) {
     //     this.arrBacklog.push({ name: this.newTask });
@@ -100,8 +127,8 @@ export default {
 </script>
 
 <style>
-.hidden{
-  display:none;
+.hidden {
+  display: none;
 }
 .drag-col1 {
   min-height: 250px;
