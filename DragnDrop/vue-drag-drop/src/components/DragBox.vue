@@ -117,79 +117,149 @@ export default {
 </script>
 
 <style>
-.buttonset{
+/* CSS styling for JT Johnson Warehouse PCF Control */
+/* Jady Mulqueeney */
+/* Version 0.1 - 8 Oct 2021 */
 
+.drag-drop-box {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    overflow: auto;
 }
-.bay{
 
-}
 .hidden {
-  display: none;
+    display: none;
 }
+
 .drag-col1 {
-  min-height: 125px;
-  width: 12%;
-  float: left;
-  background-color: #fff3cd;
-  margin: 5px;
-  padding: 5px;
-  align-content: center;
-  align-items: center;
-  color: #856404;
+    min-height: 75vh;
+    width: auto;
+    min-width: 150px;
+    float: left;
+    background-color: #f4f4f4;
+    border: 1px solid #CFCDCC;
+    margin: 40px 5px 8px 5px;
+    padding: 10px;
+    align-content: center;
+    align-items: center;
+    color: #333;
 }
+
 .drag-col2 {
-  min-height: 125px;
-  width: 12%;
-  float: left;
-  background-color: #d4edda;
-  margin: 5px;
-  padding: 5px;
-  align-content: center;
-  align-items: center;
-  color: #155724;
+    min-height: 250px;
+    width: 25%;
+    float: left;
+    background-color: #d4edda;
+    margin: 15px;
+    padding: 10px;
+    align-content: center;
+    align-items: center;
+    color: #155724;
 }
+
 .list-col1 {
-  min-height: 125px;
-  background-color: #fff3cd;
-  margin: 5px;
-  padding: 5px;
-  align-content: center;
-  align-items: center;
+    min-height: 6rem;
+    background-color: #fff;
+    margin: 0;
+    padding: 8px;
+    align-content: center;
+    align-items: center;
 }
+
 .list-col2 {
-  min-height: 125px;
-  background-color: #d4edda;
-  margin: 5px;
-  padding: 5px;
-  align-content: center;
-  align-items: center;
+    min-height: 250px;
+    background-color: #d4edda;
+    margin: 15px;
+    padding: 10px;
+    align-content: center;
+    align-items: center;
 }
+
 .list-group-item {
-  background-color: #fff;
-  border-bottom: solid;
-  border-top-color: rgba(0, 0, 0, 0.125);
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-right-color: rgba(0, 0, 0, 0.125);
-  border-right-style: solid;
-  border-right-width: 1px;
-  border-bottom-color: rgba(0, 0, 0, 0.125);
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-left-color: rgba(0, 0, 0, 0.125);
-  border-left-style: solid;
-  border-left-width: 1px;
-  border-image-source: initial;
-  border-image-slice: initial;
-  border-image-width: initial;
-  border-image-outset: initial;
-  border-image-repeat: initial;
-  padding: 0.75rem 1.25rem;
+    background-color: #fff;
+    border: 0;
+    padding: 0;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 2;
 }
+
+.list-col1 .list-group-item {
+    border: 2px dashed #cfc18f;
+    padding: 0 5px 3px 5px;
+    background-color: #fff;
+    cursor: move;
+}
+
 h3 {
-  font-size: 1.75rem;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: capitalize;
+    margin-bottom: 12px;
+    color: #333;
 }
-p {
-  padding: 3px;
+
+h4 {
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: capitalize;
+    margin-bottom: 12px;
+    padding-left: 8px;
+    color: #333;
+}
+
+.list-group-item p {
+    padding: 2px 3px 0 3px;
+}
+
+.buttonset {
+    position: absolute;
+    right: 35px;
+    top: 6px;
+}
+
+/* Green button */
+.buttonset button {
+    outline: transparent;
+    position: relative;
+    font-size: 14px;
+    font-weight: 400;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    padding: 0px 16px;
+    border-radius: 2px;
+    min-width: 172px;
+    height: 32px;
+    border: 1px solid #0A701A;
+    background-color: #0A701A;
+    color: #fff;
+}
+
+.buttonset button:hover {
+    background-color: #0a5416;
+    border-color: #0a5416;
+}
+
+/* White button */
+.buttonset button:nth-of-type(2) {
+    background-color: #fff;
+    color: #333;
+    border-color: #333;
+    margin-left: 6px;
+}
+
+.buttonset button:nth-of-type(2):hover {
+    background-color: #f4f4f4;
+    color: #111;
+    border-color: #111;
+}
+
+/* Flex */
+section#id-163 div.pa-at.pa-x.pa-as {
+    width: 100%;
 }
 </style>
