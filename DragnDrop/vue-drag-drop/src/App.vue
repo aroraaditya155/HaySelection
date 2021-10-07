@@ -29,39 +29,6 @@ export default {
       bayNoLocationArray:[],
       onSave:[],
   }
-  // data() {
-  //   return {
-  //     DragBoxObj: {},
-  //     lastBoxName:String
-  //   };
-  // },
-  // mounted() {
-  //   this.lastBoxName2 = "Allocation",
-  //   this.DragBoxObj1 = [
-  //     {
-  //       boxNumber: 1,
-  //       items: [
-  //         {
-  //           name: "Buyer 1",
-  //           property1: " Qty - 150",
-  //         },
-  //         {
-  //           name: "Buyer 2",
-  //           property1: " Qty - 150",
-  //         },
-  //         {
-  //           name: "Buyer 3",
-  //           property1: " Qty - 150",
-  //         },
-  //         {
-  //           name: "Buyer 4",
-  //           property1: " Qty - 150",
-  //         }
-  //       ],
-  //       Name: "Buyer",
-  //     },
-  //   ];
-  // },
 };
 </script>
 

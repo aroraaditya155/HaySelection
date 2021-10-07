@@ -88,7 +88,14 @@ export class DragnDrop implements ComponentFramework.StandardControl<IInputs, IO
 				let found=false;				
 				let baynum=i+1;
 				let locnum=j+1;
-				if(!context.parameters.StockOnHandDataSet.loading){					
+				if(!context.parameters.StockOnHandDataSet.loading){	
+					if(context.parameters.StockOnHandDataSet.paging !=null && context.parameters.StockOnHandDataSet.paging.hasNextPage == true)
+					{
+						//set page size
+						context.parameters.StockOnHandDataSet.paging.setPageSize(5000);
+						//load next paging
+						context.parameters.StockOnHandDataSet.paging.loadNextPage();
+					}				
 					context.parameters.StockOnHandDataSet?.sortedRecordIds.forEach((recordId)=>{
 						let currentRecord=context.parameters.StockOnHandDataSet.records[recordId];
 						let tempBoxItem = new BoxRecord();
@@ -135,7 +142,14 @@ export class DragnDrop implements ComponentFramework.StandardControl<IInputs, IO
 		NoStack.Name="Bay 1";
 		NoStack.bayNumber="1";
 		NoStack.size=numberofStacks;
-		if(!context.parameters.StockOnHandDataSet.loading){					
+		if(!context.parameters.StockOnHandDataSet.loading){	
+			if(context.parameters.StockOnHandDataSet.paging !=null && context.parameters.StockOnHandDataSet.paging.hasNextPage == true)
+			{
+				//set page size
+				context.parameters.StockOnHandDataSet.paging.setPageSize(5000);
+				//load next paging
+				context.parameters.StockOnHandDataSet.paging.loadNextPage();
+			}					
 			context.parameters.StockOnHandDataSet?.sortedRecordIds.forEach((recordId)=>{
 				let currentRecord=context.parameters.StockOnHandDataSet.records[recordId];
 				let tempBoxItem = new BoxRecord();

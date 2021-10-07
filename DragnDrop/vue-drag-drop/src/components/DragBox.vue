@@ -1,11 +1,14 @@
 <template>
- <div class="drag-drop-box">          
-    <div class="row">
-      
-      <div class="col-md-3 drag-col1" v-for="bay in bayArray" :key="bay.bayNumber">
+ <div class="drag-drop-box">  
+   <div class="buttonset">
+     <button primary v-on:click="saveClick">Save</button>
+     <button primary v-on:click="reset">Reset</button>
+    </div>        
+      <div class="bay drag-col1" v-for="bay in bayArray" :key="bay.bayNumber">
         <div class="p-2 alert alert-warning">
-          <p>{{ bay.Name }}</p>          
+          <h3>{{ bay.Name }}</h3>          
 <div class="list-group-item" v-for="(item, index) in bay.items" :key="index" :baydragabble="item.bay" :locationdraggable="item.location" :id="index+item.bay+item.location">
+    <h4>Stack {{item.location}}</h4>
     <draggable class="list-group list-col1" v-if="item.flag ==='1' "   :baydragabble="item.bay" :locationdraggable="item.location" group="items" @add="onAdd" :id="item.bay+item.location">            
             <div class="list-group-item" v-if="item.empty ==='0' " :bay="item.bay" :location="item.location" dirty="fasle" :prebay="item.bay" :prelocation="item.location" :id="item.id">
               <p>{{ item.property1 }}</p>
@@ -25,17 +28,10 @@
                 <p class="hidden" :bay="item.bay"></p>
                 <p class="hidden" :rowLocation="item.location"></p>
               </div>
-              </draggable>
-              <p>Stack {{item.location}}</p>           
+              </draggable>                         
             </div>
         </div>
     </div>
-    
-  </div> <!-- end row-->
-   <div class="row">
-     <button primary v-on:click="saveClick">Save</button>
-     <button primary v-on:click="reset">Reset</button>
-   </div>
 </div>
 
 </template>
@@ -121,44 +117,50 @@ export default {
 </script>
 
 <style>
+.buttonset{
+
+}
+.bay{
+
+}
 .hidden {
   display: none;
 }
 .drag-col1 {
-  min-height: 250px;
-  width: 25%;
+  min-height: 125px;
+  width: 12%;
   float: left;
   background-color: #fff3cd;
-  margin: 15px;
-  padding: 10px;
+  margin: 5px;
+  padding: 5px;
   align-content: center;
   align-items: center;
   color: #856404;
 }
 .drag-col2 {
-  min-height: 250px;
-  width: 25%;
+  min-height: 125px;
+  width: 12%;
   float: left;
   background-color: #d4edda;
-  margin: 15px;
-  padding: 10px;
+  margin: 5px;
+  padding: 5px;
   align-content: center;
   align-items: center;
   color: #155724;
 }
 .list-col1 {
-  min-height: 250px;
+  min-height: 125px;
   background-color: #fff3cd;
-  margin: 15px;
-  padding: 10px;
+  margin: 5px;
+  padding: 5px;
   align-content: center;
   align-items: center;
 }
 .list-col2 {
-  min-height: 250px;
+  min-height: 125px;
   background-color: #d4edda;
-  margin: 15px;
-  padding: 10px;
+  margin: 5px;
+  padding: 5px;
   align-content: center;
   align-items: center;
 }
