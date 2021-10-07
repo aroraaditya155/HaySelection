@@ -25,7 +25,8 @@
                 <p class="hidden" :bay="item.bay"></p>
                 <p class="hidden" :rowLocation="item.location"></p>
               </div>
-              </draggable>           
+              </draggable>
+              <p>Stack {{item.location}}</p>           
             </div>
         </div>
     </div>
