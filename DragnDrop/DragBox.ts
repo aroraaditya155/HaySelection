@@ -5,7 +5,6 @@ Name: string;
 size:number
 
 }
-
 export class BoxRecord{
     property3: string;
     property1: string;
@@ -13,24 +12,6 @@ export class BoxRecord{
     id:string;
     bay:string;
     location:string;
-   // id:string;
-   
+    flag:string;
+    empty:string;  
 }
-
-export interface IBoxProps {
-   attribute1Name:string;
-   attribute2Name:string;
-   attribute3Name:string;
-   rowLocationName:string;
-columnLocationName:string;
-  }
-
-  export interface IAttributeValue {
-    attribute: string;
-    value: string;
-  }
-  
-  export interface IStockRecord {
-    key: string;
-    values: IAttributeValue[];
-  }

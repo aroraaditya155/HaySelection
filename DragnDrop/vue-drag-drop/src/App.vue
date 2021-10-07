@@ -11,7 +11,7 @@
       </div>
     </div> -->
     <div>
-      <drag-box :bayArray="bayArray" ></drag-box>
+      <drag-box :bayArray="bayArray" :bayNoLocationArray="bayNoLocationArray" :onSave="onSave" ></drag-box>
     </div>
   </div>
 </template>
@@ -25,7 +25,9 @@ export default {
     DragBox,
   },
   props:{
-      bayArray: []
+      bayArray: [],
+      bayNoLocationArray:[],
+      onSave:[],
   }
   // data() {
   //   return {

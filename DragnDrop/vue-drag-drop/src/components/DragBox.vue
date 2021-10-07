@@ -1,29 +1,40 @@
 <template>
-
-
-
- <div class="drag-drop-box">
-             
+ <div class="drag-drop-box">          
     <div class="row">
+      
       <div class="col-md-3 drag-col1" v-for="bay in bayArray" :key="bay.bayNumber">
         <div class="p-2 alert alert-warning">
-          <p>{{ bay.Name }}</p>
-          
-<div class="list-group-item" v-for="(item, index) in bay.items" :key="index" :baydragabble="item.bay" :locationdraggable="item.location">
-          <draggable class="list-group list-col1"  :baydragabble="item.bay" :locationdraggable="item.location" group="items1" @end="onEnd" @add="onAdd" >
-            <div v-if="item.bay !='2'" class="list-group-item" :bay="item.bay" :location="item.location">
+          <p>{{ bay.Name }}</p>          
+<div class="list-group-item" v-for="(item, index) in bay.items" :key="index" :baydragabble="item.bay" :locationdraggable="item.location" :id="index+item.bay+item.location">
+    <draggable class="list-group list-col1" v-if="item.flag ==='1' "   :baydragabble="item.bay" :locationdraggable="item.location" group="items" @add="onAdd" :id="item.bay+item.location">            
+            <div class="list-group-item" v-if="item.empty ==='0' " :bay="item.bay" :location="item.location" dirty="fasle" :prebay="item.bay" :prelocation="item.location" :id="item.id">
               <p>{{ item.property1 }}</p>
               <p>{{ item.property2 }}</p>
               <p>{{ item.property3 }}</p>
               <p class="hidden" :id="item.id"></p>
               <p class="hidden" :bay="item.bay"></p>
               <p class="hidden" :rowLocation="item.location"></p>
+            </div> 
+          </draggable>           
+          <draggable class="list-group list-col1"  group="items" v-if="item.flag ==='0' " @add="onAdd" :id="item.bay+item.location">
+              <div class="list-group-item" v-for="(item, index) in bayNoLocationArray[0].items" :key="index" :bay="item.bay" :location="item.location" dirty="fasle" :prebay="item.bay" :prelocation="item.location" :id="item.id">
+                <p>{{ item.property1 }}</p>
+                <p>{{ item.property2 }}</p>
+                <p>{{ item.property3 }}</p>
+                <p class="hidden" :id="item.id"></p>
+                <p class="hidden" :bay="item.bay"></p>
+                <p class="hidden" :rowLocation="item.location"></p>
+              </div>
+              </draggable>           
             </div>
-          </draggable>
-</div>
         </div>
     </div>
-  </div>
+    
+  </div> <!-- end row-->
+   <div class="row">
+     <button primary v-on:click="saveClick">Save</button>
+     <button primary v-on:click="reset">Reset</button>
+   </div>
 </div>
 
 </template>
@@ -37,92 +48,74 @@ export default {
 
   props: {
     bayArray: [],
+    bayNoLocationArray: [],
+    onSave:[],
   },
   data() {
-    return {
-      newTask: "",
-      arrBacklog: [
-        { name: "Buyer 1 - Qty - 50" },
-        { name: "Buy2" },
-        { name: "Buy3" },
-        { name: "Buy4" },
-      ],
-      arr2: [
-        { name: "Sup1" },
-        { name: "Sup2" },
-        { name: "Sup3" },
-        { name: "Sup4" },
-      ],
-      arr3: [],
-      availableItemOptions: {
-        group: {
-          name: "items"
-          
-        },
-      },
-      clonedCustomerItemOptions: {
-        group: "items",
-      },
-      clonedCustomerItems: [],
-      clonedItemAllocationOptions: {
-        group: "items",
-      },
-      clonedAllocationItems: [],
+    return {     
     };
   },
   methods: {
-    onAdd:function(e){
-      debugger;
-      if(e.srcElement.childElementCount >1 ){
-        e.item.remove;
-          var bay = e.item.getAttribute('bay');
-      var location = e.item.getAttribute('location');
-      var parentEl  = document.querySelectorAll("[baydragabble='"+bay+"'][locationdraggable='"+location+"']")[0];
-      parentEl.firstChild.appendChild(e.item);
+    onAdd:function(e){  
+      if(e.target.childElementCount >1 ){
+        e.item.remove;        
+        let bay = e.item.getAttribute('bay');         
+        let location = e.item.getAttribute('location');       
+        let parentEl="";              
+        if(location!=="0"){  
+          if(location==="1" && bay==="1"){
+            parentEl  = document.getElementById("11");          
+            parentEl.appendChild(e.item);    
+          }else{
+            parentEl  = document.querySelectorAll("[baydragabble='"+bay+"'][locationdraggable='"+location+"']")[0];
+            parentEl.firstChild.appendChild(e.item);
+          }        
+                      
+        }else{
+          parentEl  = document.getElementById("11");          
+          parentEl.appendChild(e.item);              
+        }
+       
       }
       else{
-        //update bay and location for e.item frome.source
-        // Add dirty
-        e.source
-      }
+        //update bay and location
+        let targetParentID=document.getElementById(e.target.id).parentNode.id;
+        let targetParentBaydragabble=document.getElementById(targetParentID).getAttribute('baydragabble');
+        let targetParentLocationdraggable=document.getElementById(targetParentID).getAttribute('locationdraggable');        
+        e.item.setAttribute('bay', targetParentBaydragabble);
+        e.item.setAttribute('location', targetParentLocationdraggable);
+        e.item.setAttribute('dirty', true);
+      } 
+    },
     
-
+    saveClick(){
+      let dirtyDiv= document.querySelectorAll("[dirty='true']");
+      this.onSave(dirtyDiv);      
     },
-    onEnd:function(e){
-     
+    reset(){
+      let dirtyDiv= document.querySelectorAll("[dirty='true']"),i;
+      for(i=0;i<dirtyDiv.length;++i){       
+        let bay=dirtyDiv[i].getAttribute('prebay');
+        let location=dirtyDiv[i].getAttribute('prelocation');         
+        dirtyDiv[i].setAttribute('dirty', false);
+        dirtyDiv[i].setAttribute('bay', bay);
+        dirtyDiv[i].setAttribute('location', location);        
+        let parentEl="";
+        if(location==="0")        {
+          parentEl  = document.getElementById("11");          
+          parentEl.appendChild(dirtyDiv[i]);  
+        }else{
+          if(location==="1"&&bay==="1"){
+            parentEl  = document.getElementById("11");          
+            parentEl.appendChild(dirtyDiv[i]);  
+          }else{
+            parentEl  = document.querySelectorAll("[baydragabble='"+bay+"'][locationdraggable='"+location+"']")[0];
+            parentEl.firstChild.appendChild(dirtyDiv[i]);
+          }
+        }
+      }
     },
-    onMove:function(e){
-      alert("move");debugger;
-    }
-    // add() {
-    //   if (this.newTask) {
-    //     this.arrBacklog.push({ name: this.newTask });
-    //     this.newTask = "";
-    //   }
-    // },
   },
-  // mounted() {
-  //   this.newObj = [
-  //     {
-  //       heading: "Section 1",
-  //       content: "something something",
-  //       questionAndAnswer: [
-  //         { question: "Q1fddf", answer: "A1" },
-  //         { question: "Q2", answer: "A2" },
-  //       ],
-  //       sectionNumber:1
-  //     },
-  //     {
-  //       heading: "Section 2",
-  //       content: "something something for the section2",
-  //       questionAndAnswer: [
-  //         { question: "Q1", answer: "A1" },
-  //         { question: "Q2", answer: "A2" },
-  //       ],
-  //       sectionNumber:2
-  //     },
-  //   ];
-  // },
 };
 </script>
 
