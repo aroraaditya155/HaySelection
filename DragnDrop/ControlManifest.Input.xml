@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="PCF.StockSelection" constructor="DragnDrop" version="0.0.56" display-name-key="StockSelection" description-key="StockSelection" control-type="standard">
+  <control namespace="PCF.StockSelection" constructor="DragnDrop" version="0.0.65" display-name-key="StockSelection" description-key="StockSelection" control-type="standard">
     <!-- dataset node represents a set of entity records on CDS; allow more than one datasets -->
     <data-set name="StockOnHandDataSet" display-name-key="StocOnHandDataSet_key1">
      

@@ -194,10 +194,14 @@ export class DragnDrop implements ComponentFramework.StandardControl<IInputs, IO
 			throw new Error("Stock On Hand record update error:"+ex);
 		}
 	}
+	
+	  
+	 
+	 
 	//Retrive dirty data 
 	OnSave=(dirtyDiv: NodeListOf<Element>): void=>{
 		//@ts-ignore
-		Xrm.Utility.showProgressIndicator("Please wait until record(s) is saving...");
+		Xrm.Utility.showProgressIndicator("Please wait until record(s) is saving...");		
 		for(let i=0;i<dirtyDiv.length;++i){
 			console.log("Bay:"+dirtyDiv[i].getAttribute('bay'));
 			console.log("Location:"+dirtyDiv[i].getAttribute('location'));	
@@ -210,8 +214,11 @@ export class DragnDrop implements ComponentFramework.StandardControl<IInputs, IO
 			dirtyDiv[i].setAttribute('prebay', bay);
 			dirtyDiv[i].setAttribute('prelocation', stack);
 		  }
-		//@ts-ignore
-		Xrm.Utility.closeProgressIndicator();
+		  setTimeout( () => { 
+			//@ts-ignore
+			Xrm.Utility.closeProgressIndicator();
+		 }, 1000 );
+		
 	}
 	/**
 	 * It is called by the framework prior to a control receiving new data.

@@ -1,5 +1,5 @@
 <template>
- <div class="drag-drop-box">  
+ <div id="dataSetRoot_StockOnHand" class=" drag-drop-box">  
    <div class="buttonset">
      <button primary v-on:click="saveClick">Save</button>
      <button primary v-on:click="reset">Reset</button>
@@ -10,7 +10,7 @@
 <div class="list-group-item" v-for="(item, index) in bay.items" :key="index" :baydragabble="item.bay" :locationdraggable="item.location" :id="index+item.bay+item.location">
     <h4>Stack {{item.location}}</h4>
     <draggable class="list-group list-col1" v-if="item.flag ==='1' "   :baydragabble="item.bay" :locationdraggable="item.location" group="items" @add="onAdd" :id="item.bay+item.location">            
-            <div class="list-group-item" v-if="item.empty ==='0' " :bay="item.bay" :location="item.location" dirty="fasle" :prebay="item.bay" :prelocation="item.location" :id="item.id">
+            <div class="list-group-item-hay" v-if="item.empty ==='0' " :bay="item.bay" :location="item.location" dirty="fasle" :prebay="item.bay" :prelocation="item.location" :id="item.id">
               <p>{{ item.property1 }}</p>
               <p>{{ item.property2 }}</p>
               <p>{{ item.property3 }}</p>
@@ -119,9 +119,9 @@ export default {
 <style>
 /* CSS styling for JT Johnson Warehouse PCF Control */
 /* Jady Mulqueeney */
-/* Version 0.1 - 8 Oct 2021 */
+/* Version 0.2 - 8 Oct 2021 */
 
-.drag-drop-box {
+#dataSetRoot_StockOnHand .drag-drop-box {
     width: auto;
     height: auto;
     display: flex;
@@ -129,11 +129,11 @@ export default {
     overflow: auto;
 }
 
-.hidden {
+#dataSetRoot_StockOnHand .hidden {
     display: none;
 }
 
-.drag-col1 {
+#dataSetRoot_StockOnHand .drag-col1 {
     min-height: 75vh;
     width: auto;
     min-width: 150px;
@@ -147,7 +147,7 @@ export default {
     color: #333;
 }
 
-.drag-col2 {
+#dataSetRoot_StockOnHand .drag-col2 {
     min-height: 250px;
     width: 25%;
     float: left;
@@ -159,7 +159,7 @@ export default {
     color: #155724;
 }
 
-.list-col1 {
+#dataSetRoot_StockOnHand .list-col1 {
     min-height: 6rem;
     background-color: #fff;
     margin: 0;
@@ -168,7 +168,7 @@ export default {
     align-items: center;
 }
 
-.list-col2 {
+#dataSetRoot_StockOnHand .list-col2 {
     min-height: 250px;
     background-color: #d4edda;
     margin: 15px;
@@ -177,7 +177,7 @@ export default {
     align-items: center;
 }
 
-.list-group-item {
+#dataSetRoot_StockOnHand .list-group-item {
     background-color: #fff;
     border: 0;
     padding: 0;
@@ -186,14 +186,14 @@ export default {
     z-index: 2;
 }
 
-.list-col1 .list-group-item {
+#dataSetRoot_StockOnHand .list-col1 .list-group-item {
     border: 2px dashed #cfc18f;
     padding: 0 5px 3px 5px;
     background-color: #fff;
     cursor: move;
 }
 
-h3 {
+#dataSetRoot_StockOnHand h3 {
     font-size: 20px;
     font-weight: 600;
     text-transform: capitalize;
@@ -201,7 +201,7 @@ h3 {
     color: #333;
 }
 
-h4 {
+#dataSetRoot_StockOnHand h4 {
     font-size: 16px;
     font-weight: 500;
     text-transform: capitalize;
@@ -210,18 +210,18 @@ h4 {
     color: #333;
 }
 
-.list-group-item p {
+#dataSetRoot_StockOnHand .list-group-item p {
     padding: 2px 3px 0 3px;
 }
 
-.buttonset {
+#dataSetRoot_StockOnHand .buttonset {
     position: absolute;
     right: 35px;
     top: 6px;
 }
 
 /* Green button */
-.buttonset button {
+#dataSetRoot_StockOnHand .buttonset button {
     outline: transparent;
     position: relative;
     font-size: 14px;
@@ -239,20 +239,20 @@ h4 {
     color: #fff;
 }
 
-.buttonset button:hover {
+#dataSetRoot_StockOnHand .buttonset button:hover {
     background-color: #0a5416;
     border-color: #0a5416;
 }
 
 /* White button */
-.buttonset button:nth-of-type(2) {
+#dataSetRoot_StockOnHand .buttonset button:nth-of-type(2) {
     background-color: #fff;
     color: #333;
     border-color: #333;
     margin-left: 6px;
 }
 
-.buttonset button:nth-of-type(2):hover {
+#dataSetRoot_StockOnHand .buttonset button:nth-of-type(2):hover {
     background-color: #f4f4f4;
     color: #111;
     border-color: #111;
