@@ -99,7 +99,8 @@ export class DragnDrop implements ComponentFramework.StandardControl<IInputs, IO
 					context.parameters.StockOnHandDataSet?.sortedRecordIds.forEach((recordId)=>{
 						let currentRecord=context.parameters.StockOnHandDataSet.records[recordId];
 						let tempBoxItem = new BoxRecord();
-						tempBoxItem.bay=currentRecord.getFormattedValue("vel_bay");
+						let bay=currentRecord.getFormattedValue("vel_bay");
+						tempBoxItem.bay=bay.replace(/\D/g,'');//currentRecord.getFormattedValue("vel_bay");
 						tempBoxItem.location=currentRecord.getFormattedValue("vel_stackrank");						
 						if(baynum===parseInt(tempBoxItem.bay) && locnum===parseInt(tempBoxItem.location)){
 							tempBoxItem.property1=currentRecord.getFormattedValue("vel_name");
@@ -155,7 +156,9 @@ export class DragnDrop implements ComponentFramework.StandardControl<IInputs, IO
 				let tempBoxItem = new BoxRecord();
 				tempBoxItem.bay="1";
 				tempBoxItem.location=currentRecord.getFormattedValue("vel_stackrank");	
-				if(currentRecord.getFormattedValue("vel_bay")==="1"&&tempBoxItem.location==="1"){
+				let bay=currentRecord.getFormattedValue("vel_bay");
+				bay=bay.replace(/\D/g,'');
+				if(bay==="1"&&tempBoxItem.location==="1"){
 					tempBoxItem.property1=currentRecord.getFormattedValue("vel_name");
 					tempBoxItem.property2=currentRecord.getFormattedValue("vel_productcategory");
 					tempBoxItem.property3=currentRecord.getFormattedValue("vel_grade");
@@ -185,7 +188,7 @@ export class DragnDrop implements ComponentFramework.StandardControl<IInputs, IO
 		let entityName="vel_stockonhand";		
 		var data =
    		 {
-        	"vel_bay": bay,
+        	"vel_bay": "Bay "+bay,
        	 	"vel_stackrank": stack, 
    		}	
 		try{
@@ -210,7 +213,7 @@ export class DragnDrop implements ComponentFramework.StandardControl<IInputs, IO
 			let stack=dirtyDiv[i].getAttribute('location') ?? "";
 			let id=dirtyDiv[i].getAttribute('id')?? "";
 			this.UpdateBayAndLocation(bay,stack,id);
-			dirtyDiv[i].setAttribute('dirty', 'fasle');
+			dirtyDiv[i].setAttribute('dirty', 'false');
 			dirtyDiv[i].setAttribute('prebay', bay);
 			dirtyDiv[i].setAttribute('prelocation', stack);
 		  }

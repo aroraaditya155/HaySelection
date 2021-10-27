@@ -10,7 +10,7 @@
 <div class="list-group-item" v-for="(item, index) in bay.items" :key="index" :baydragabble="item.bay" :locationdraggable="item.location" :id="index+item.bay+item.location">
     <h4>Stack {{item.location}}</h4>
     <draggable class="list-group list-col1" v-if="item.flag ==='1' "   :baydragabble="item.bay" :locationdraggable="item.location" group="items" @add="onAdd" :id="item.bay+item.location">            
-            <div class="list-group-item-hay" v-if="item.empty ==='0' " :bay="item.bay" :location="item.location" dirty="fasle" :prebay="item.bay" :prelocation="item.location" :id="item.id">
+            <div class="list-group-item" v-if="item.empty ==='0' " :bay="item.bay" :location="item.location" dirty="false" :prebay="item.bay" :prelocation="item.location" :id="item.id">
               <p>{{ item.property1 }}</p>
               <p>{{ item.property2 }}</p>
               <p>{{ item.property3 }}</p>
@@ -20,7 +20,7 @@
             </div> 
           </draggable>           
           <draggable class="list-group list-col1"  group="items" v-if="item.flag ==='0' " @add="onAdd" :id="item.bay+item.location">
-              <div class="list-group-item" v-for="(item, index) in bayNoLocationArray[0].items" :key="index" :bay="item.bay" :location="item.location" dirty="fasle" :prebay="item.bay" :prelocation="item.location" :id="item.id">
+              <div class="list-group-item" v-for="(item, index) in bayNoLocationArray[0].items" :key="index" :bay="item.bay" :location="item.location" dirty="false" :prebay="item.bay" :prelocation="item.location" :id="item.id">
                 <p>{{ item.property1 }}</p>
                 <p>{{ item.property2 }}</p>
                 <p>{{ item.property3 }}</p>
@@ -65,7 +65,8 @@ export default {
             parentEl.appendChild(e.item);    
           }else{
             parentEl  = document.querySelectorAll("[baydragabble='"+bay+"'][locationdraggable='"+location+"']")[0];
-            parentEl.firstChild.appendChild(e.item);
+            // parentEl.firstChild.appendChild(e.item);
+            parentEl.childNodes[2].appendChild(e.item);
           }        
                       
         }else{
@@ -107,7 +108,8 @@ export default {
             parentEl.appendChild(dirtyDiv[i]);  
           }else{
             parentEl  = document.querySelectorAll("[baydragabble='"+bay+"'][locationdraggable='"+location+"']")[0];
-            parentEl.firstChild.appendChild(dirtyDiv[i]);
+            //parentEl.firstChild.appendChild(dirtyDiv[i]);
+            parentEl.childNodes[2].appendChild(dirtyDiv[i]);
           }
         }
       }
@@ -160,7 +162,7 @@ export default {
 }
 
 #dataSetRoot_StockOnHand .list-col1 {
-    min-height: 6rem;
+   /* min-height: 6rem; */
     background-color: #fff;
     margin: 0;
     padding: 8px;
